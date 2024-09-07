@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Profile Card</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to bottom right, #1c1c1c, #4e4e4e);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+            overflow: hidden;
+        }
+        .profile-card {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #4caf50; /* Minecraft green */
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            perspective: 1000px;
+        }
+        .profile-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.7);
+        }
+        .profile-card img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 5px solid #ff9800; /* Minecraft orange */
+            box-shadow: 0 0 20px rgba(255, 152, 0, 0.7);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .profile-card img:hover {
+            transform: rotate(15deg) scale(1.15);
+            box-shadow: 0 0 25px rgba(255, 152, 0, 0.8);
+        }
+        .profile-card h1 {
+            margin: 0;
+            font-size: 2.8em;
+            color: #ff9800; /* Minecraft orange */
+            transition: color 0.3s ease;
+        }
+        .profile-card h1:hover {
+            color: #ffc107; /* Lighter orange */
+        }
+        .profile-card p {
+            font-size: 1.3em;
+            color: #e0e0e0; /* Light gray */
+            margin: 15px 0;
+            line-height: 1.6;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .button-container {
+            margin-top: 25px;
+        }
+        .button-container a {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #4caf50; /* Minecraft green */
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .button-container a:hover {
+            background: #388e3c; /* Darker Minecraft green */
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+        .profile-card-inner {
+            transition: transform 0.1s;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-card">
+        <div class="profile-card-inner">
+            <img src="https://cdn.discordapp.com/avatars/1160426569156808734/d9a5a199a4c740ac122587a76c5589de.png" alt="Profile Picture">
+            <h1>PlayerName</h1>
+            <p>Hello! I'm a Minecraft player with a passion for building and exploring. Welcome to my profile!</p>
+            <div class="button-container">
+                <a href="https://example.com" target="_blank">Visit My Site</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const card = document.querySelector('.profile-card-inner');
+
+        card.addEventListener('mousemove', (e) => {
+            const { left, top, width, height } = card.getBoundingClientRect();
+            const centerX = left + width / 2;
+            const centerY = top + height / 2;
+            const deltaX = e.clientX - centerX;
+            const deltaY = e.clientY - centerY;
+            const rotateX = ((deltaY / height) * 15).toFixed(2); // Adjust the multiplier for rotation sensitivity
+            const rotateY = ((-deltaX / width) * 15).toFixed(2); // Adjust the multiplier for rotation sensitivity
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        });
+    </script>
+</body>
+</html>
